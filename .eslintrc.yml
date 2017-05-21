@@ -55,8 +55,8 @@ rules:
   camelcase: 0
 
   # jsdoc is mandatory
-  require-jsdoc: 2
-  valid-jsdoc: 2
+  require-jsdoc: 0
+  valid-jsdoc: 0
 
   # this feature is cool but not supported by Node 4, disable via comments
   prefer-spread: 1
@@ -76,7 +76,7 @@ rules:
   no-invalid-this: 2
 
   # All object must be uppercase
-  new-cap: 2
+  new-cap: 0
 
   # readbility is important, no multiple inline declarations
   one-var: 2
