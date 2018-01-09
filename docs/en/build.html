@@ -1,0 +1,77 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Build the source code · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Build the source code · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/index.html"/><meta property="og:description" content="Verdaccio relies on `yarn` instead `npm` to download depenedencies."/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="http://www.verdaccio.org/blog/atom.xml" title="Verdaccio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="http://www.verdaccio.org/blog/feed.xml" title="Verdaccio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/verdaccio-tiny.png"/><h2 class="headerTitle">Verdaccio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/en/installation.html" target="_self">Docs</a></li><li><a href="/en/help.html" target="_self">Help</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/es-ES">Español</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Development</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/cli.html">Command Line Tool</a></li></ul></div><div class="navGroup navGroupActive"><h3>Configuration</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/configuration.html">Configuration File</a></li><li class="navListItem"><a class="navItem" href="/docs/en/uplinks.html">Uplinks</a></li><li class="navListItem"><a class="navItem" href="/docs/en/packages.html">Package Access</a></li><li class="navListItem"><a class="navItem" href="/docs/en/authentification.html">Authentification</a></li><li class="navListItem"><a class="navItem" href="/docs/en/notifications.html">Notifications</a></li><li class="navListItem"><a class="navItem" href="/docs/en/logger.html">Logger</a></li><li class="navListItem"><a class="navItem" href="/docs/en/webui.html">Web User Interface</a></li></ul></div><div class="navGroup navGroupActive"><h3>Server</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/server-configuration.html">Server Configuration</a></li><li class="navListItem"><a class="navItem" href="/docs/en/reverse-proxy.html">Reverse Proxy Setup</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ssl.html">Set up the SSL Certificates</a></li><li class="navListItem"><a class="navItem" href="/docs/en/windows.html">Installing As a Windows Service</a></li><li class="navListItem"><a class="navItem" href="/docs/en/iss-server.html">Installing on IIS server</a></li></ul></div><div class="navGroup navGroupActive"><h3>Plugins</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/plugins.html">Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/dev-plugins.html">Developing Plugins</a></li></ul></div><div class="navGroup navGroupActive"><h3>DevOps</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/en/kubernetes.html">Kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/en/ansible.html">Installing with Ansible</a></li></ul></div><div class="navGroup navGroupActive"><h3>Development</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/en/build.html">Build the source code</a></li><li class="navListItem"><a class="navItem" href="/docs/en/contributing.html">Contributing Verdaccio</a></li><li class="navListItem"><a class="navItem" href="/docs/en/source-code.html">Source Code</a></li><li class="navListItem"><a class="navItem" href="/docs/en/unit-testing.html">Unit Testing</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/protect-your-dependencies.html">Protecting packages</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Build the source code</h1></header><article><div><span><p>Verdaccio relies on <code>yarn</code> instead <code>npm</code> to download depenedencies.</p>
+<p><em>Note: the current build only will build with <code>➜ yarn</code> latest.</em></p>
+<pre><code class="hljs css bash">  yarn install
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="scripts"></a><a href="#scripts" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scripts</h2>
+<p>We have a list of scripts that you will use for diferent kind of tasks, in the following section we describe all posible task based on branches. (yes 🎉🎉🎉 !! 🚧 we are working in the version 3.x that will provide a better and modern stack based on <strong>Babel</strong> and <strong>Flow</strong> 🚧.</p>
+<h4><a class="anchor" aria-hidden="true" name="master-branch-2x"></a><a href="#master-branch-2x" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Master branch (2.x)</h4>
+<p>On master branch the unique part we have to build is the UI which is based on React.js, webpack and CSS Modules.</p>
+<h3><a class="anchor" aria-hidden="true" name="scripts"></a><a href="#scripts" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scripts</h3>
+<table>
+<thead>
+<tr><th>script</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>release</td><td>this script is used to generate changelog and raise up the version according the commits messages</td></tr>
+<tr><td>prepublish</td><td>it ensures before publish the new ui is being generated</td></tr>
+<tr><td>test</td><td>run all the test</td></tr>
+<tr><td>pre:ci</td><td>specific task for CI, build the UI required for test</td></tr>
+<tr><td>test:ci</td><td>run test generating coverage</td></tr>
+<tr><td>test:only</td><td>run only test</td></tr>
+<tr><td>test:coverage</td><td>run <code>nyc</code> as a wrapper to generate coverage with mocha test</td></tr>
+<tr><td>coverage:html</td><td>run <code>nyc</code> to generate coverage reports</td></tr>
+<tr><td>coverage:publish</td><td>publish on <code>codecov</code> the coverage (don't use it)</td></tr>
+<tr><td>lint</td><td>run the linting for javascript code.</td></tr>
+<tr><td>lint:css</td><td>run the linter for <code>css</code></td></tr>
+<tr><td>dev:webui</td><td>run a <code>webpack</code> server with hot reloading enabled <code>http://localhost:4872/#/</code> it requires a <code>verdaccio</code> server running in port <code>4873</code>.</td></tr>
+<tr><td>pre:webpack</td><td>prepare the field for webpack (it a substask of <code>build:webui</code>)</td></tr>
+<tr><td>build:webui</td><td>create the static assets for the UI with <code>webpack</code></td></tr>
+<tr><td>build:docker</td><td>create a local docker image with <code>verdaccio</code></td></tr>
+<tr><td>build:rpi</td><td>create a local docker for raspberry pi image with <code>verdaccio</code> <strong>(experimental with no support)</strong></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="branch-3x"></a><a href="#branch-3x" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Branch (3.x)</h4>
+<p>The next major version is based on <code>babel</code> and <code>flow</code>. If you switch from master ensure to run <code>yarn install</code> again.</p>
+<p><em>Note: Only new scripts in bold</em></p>
+<h3><a class="anchor" aria-hidden="true" name="scripts"></a><a href="#scripts" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scripts</h3>
+<table>
+<thead>
+<tr><th>script</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>flow</strong></td><td>run flow check</td></tr>
+<tr><td><strong>dev:start</strong></td><td>run <code>babel-node</code> and transpile code on memory</td></tr>
+<tr><td><strong>code:build</strong></td><td>transpile <code>verdaccio</code> with <code>babel</code> and  copy transpiled code to <code>build/</code></td></tr>
+<tr><td>release</td><td>this script is used to generate changelog and raise up the version according the commits messages</td></tr>
+<tr><td>prepublish</td><td>it ensures before publish the new ui is being generated</td></tr>
+<tr><td>test</td><td>run all the test <code>jest</code></td></tr>
+<tr><td>pre:ci</td><td>specific task for CI, build the UI required for test</td></tr>
+<tr><td>test:ci</td><td>run test generating coverage</td></tr>
+<tr><td>test:only</td><td>run only test</td></tr>
+<tr><td>coverage:publish</td><td>publish on <code>codecov</code> the coverage (don't use it)</td></tr>
+<tr><td>lint</td><td>run the linting for javascript code.</td></tr>
+<tr><td>lint:css</td><td>run the linter for <code>css</code></td></tr>
+<tr><td>dev:webui</td><td>run a <code>webpack</code> server with hot reloading enabled <code>http://localhost:4872/#/</code> it requires a <code>verdaccio</code> server running in port <code>4873</code>.</td></tr>
+<tr><td>pre:webpack</td><td>prepare the field for webpack (it a substask of <code>build:webui</code>)</td></tr>
+<tr><td>build:webui</td><td>create the static assets for the UI with <code>webpack</code></td></tr>
+<tr><td>build:docker</td><td>create a local docker image with <code>verdaccio</code></td></tr>
+<tr><td>build:rpi</td><td>create a local docker for raspberry pi image with <code>verdaccio</code> <strong>(experimental with no support)</strong></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="ansible.html">← Installing with Ansible</a><a class="docs-next button" href="contributing.html">Contributing Verdaccio →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/installation.html">Getting Started</a><a href="/docs/en/docker.html">Docker</a><a href="/docs/en/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>

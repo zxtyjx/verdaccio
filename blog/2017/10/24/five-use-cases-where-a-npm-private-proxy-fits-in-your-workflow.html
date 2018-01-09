@@ -1,0 +1,132 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Five use cases where a npm private proxy fits in your workflow · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Five use cases where a npm private proxy fits in your workflow · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html"/><meta property="og:description" content="This article is about why setting up a npm private proxy is a good idea, going through most common questions that I’ve been asked since contributing to sinopia’s fork [verdaccio](http://www.verdaccio.org/), and how a developer addresses many use cases that made me appreciate how useful it can be set up a local private proxy"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="http://www.verdaccio.org/blog/atom.xml" title="Verdaccio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="http://www.verdaccio.org/blog/feed.xml" title="Verdaccio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/verdaccio-tiny.png"/><h2 class="headerTitle">Verdaccio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/en/installation.html" target="_self">Docs</a></li><li><a href="/en/help.html" target="_self">Help</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/es-ES">Español</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Recent Posts</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Recent Posts</h3><ul><li class="navListItem"><a class="navItem" href="/blog/2017/12/20/new-version-3.0.0.html">New Version 3.0.0</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html">Five use cases where a npm private proxy fits in your workflow</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer documentContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1><a href="/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html">Five use cases where a npm private proxy fits in your workflow</a></h1><p class="post-meta">October 24, 2017</p><div class="authorBlock"><p class="post-authorName"><a href="http://twitter.com/jotadeveloper" target="_blank">Juan Picado</a></p><div class="authorPhoto"><a href="http://twitter.com/jotadeveloper" target="_blank"><img src="https://graph.facebook.com/1122901551/picture/?height=200&amp;width=200"/></a></div></div></header><div><span><p>This article is about why setting up a npm private proxy is a good idea, going through most common questions that I’ve been asked since contributing to sinopia’s fork <a href="http://www.verdaccio.org/">verdaccio</a>, and how a developer addresses many use cases that made me appreciate how useful it can be set up a local private proxy
+Let’s review them.</p>
+<h2><a class="anchor" aria-hidden="true" name="as-offline-installation"></a><a href="#as-offline-installation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>As offline installation</h2>
+<p><img src="/img/blog/offline.png" alt="An image from the slides doesn’t load due lack of connection"></p>
+<p>These days the solution to offline mode is called yarn and lately npm@5.x . It’s a valid argument, both clients are awesome. The offline mode works fine but does not solve all the offline issues.</p>
+<!--truncate-->
+<ul>
+<li>Developer Teams: Yarn caches all your packages locally avoiding the possibility of you inadvertently sharing it within your company. Besides it is not unusual that anyone in your team stops working because he/she is unable to download any new dependency due lack of Internet connection.</li>
+<li>Traveling: I’m a traveler 🛫 and I have to face this pretty often, either roaming or 3G makes downloading any tarball take an eternity. Have you coded while you traveling in an airplane?</li>
+<li>IT Conferences: Please raise your hand if you have had connection issues in IT conferences as a speaker 😓 or attendee 😩. You might argue that <strong>yarn/npm</strong> can solve this. I agree with you, but, there are dozens of use cases that won’t be covered by their offline mode. For instance, a new dependency version you cannot publish yet publicly or pure demonstrations of publishing, dist-tags and any other command from yarn or npm. I recognize that having a local registry is pretty handy.</li>
+</ul>
+<blockquote>
+<p>Verdaccio is able to install and publish in offline mode.</p>
+</blockquote>
+<p>Being offline seems to not be an issue in modern countries most of the time. But, reading the topics in verdaccio it is amazing how frequent it is for people to have internet restrictions in his own companies and their easier solution is backup the whole storage and restore it at work.</p>
+<h2><a class="anchor" aria-hidden="true" name="as-a-hub-to-pull-from-many-registries"></a><a href="#as-a-hub-to-pull-from-many-registries" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>As a hub to pull from many registries</h2>
+<p><img src="/img/blog/hub.png" alt="verdaccio/sinopia uplink concept"></p>
+<p>Handling multiple registries is something quite common these days and to keep switching is really a slow and annoying process.</p>
+<pre><code class="hljs">npm install --registry <span class="hljs-string">http:</span><span class="hljs-comment">//localhost:4873</span>
+</code></pre>
+<p>Well, lately I found <a href="https://github.com/Pana/nrm">this tool</a> to make this process painless, but still …
+Also, something is quite usual that many <a href="https://github.com/verdaccio/verdaccio/issues?utf8=%E2%9C%93&amp;q=Artifactory%20OR%20nexus%20">developers use paid registries</a> as JFrog Artifactory or Nexus3 (<a href="https://www.sonatype.com/nexus-repository-oss">Nexus has a free npm OSS</a>) and sometimes online access is restricted for such registries.</p>
+<h3><a class="anchor" aria-hidden="true" name="how-verdaccio-solves-this"></a><a href="#how-verdaccio-solves-this" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How verdaccio solves this?</h3>
+<p>Easy peasy, it uses <a href="https://github.com/verdaccio/verdaccio/blob/master/wiki/uplinks.md">uplinks</a>. You can proxy multiple registries using a single one instead, that’s cool, right?</p>
+<pre><code class="hljs css yaml"><span class="hljs-attr">uplinks:</span>
+<span class="hljs-attr">  npmjs:</span>
+<span class="hljs-attr">   url:</span> <span class="hljs-attr">https://registry.npmjs.org/</span>
+<span class="hljs-attr">  server2:</span>
+<span class="hljs-attr">    url:</span> <span class="hljs-attr">http://mirror.local.net/</span>
+<span class="hljs-attr">  server3:</span>
+<span class="hljs-attr">    url:</span> <span class="hljs-attr">http://mirror2.local.net:9000/</span>
+<span class="hljs-attr">  yarn:</span>
+<span class="hljs-attr">    url:</span> <span class="hljs-attr">https://registry.yarnpkg.com/</span>
+</code></pre>
+<p>Uplinks <strong>allow you to set multiples registries and you can define later on which dependencies should be resolved by any of your multiple registries</strong>. Even if any of them require any sort of specific header you can add/override them.</p>
+<h2><a class="anchor" aria-hidden="true" name="as-a-staging-registry-server"></a><a href="#as-a-staging-registry-server" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>As a staging registry server</h2>
+<p><img src="/img/blog/staging.jpeg" alt="http://www.commitstrip.com/en/"></p>
+<p>All of you are used to dealing with a staging server. It’s the final step before going into production and where we test our projects, which might, in the end, depend on private npm modules as well.
+Didn’t it happen to you that you found a bug in your favorite project and despite being easy to fix, they took years until they released a patch 😩😩 ? Yeah, 😅 I’m <a href="https://github.com/verdaccio/verdaccio/issues?q=is%3Aissue+is%3Aopen+sort%3Acreated-asc">one of those</a>, but I always try to reply asap 🙃.
+Let’s say you are using lodash and it turns out that it is an important library in your project and you need this fixed right now. You have some options here:</p>
+<ul>
+<li><a href="https://medium.com/@bestander_nz/my-node-modules-are-in-git-again-4fb18f5671a">Commit</a> <code>node_modules/lodash</code> ? That’s nasty.</li>
+<li>Fix locally and pack the tarball within your package and reference it from <code>package.json</code> ? Well .. I did that one or two times. But frankly …how are you planning to get the future official patch then? You will need to switch again the dependency to a semver version anyway.</li>
+</ul>
+<pre><code class="hljs"><span class="hljs-string">"dependencies"</span>: {
+    <span class="hljs-string">"lodash"</span>: <span class="hljs-string">"./packages/lodash.patch.tar.gz"</span>
+}
+</code></pre>
+<ul>
+<li><a href="https://stackoverflow.com/a/23210615/308341">Git reference is an usual work around</a>, but frankly, I don’t like it.</li>
+</ul>
+<pre><code class="hljs"><span class="hljs-string">"dependencies"</span> : {
+  <span class="hljs-string">"name1"</span> : <span class="hljs-string">"git://github.com/user/project.git<span class="hljs-subst">#commit-ish</span>"</span>,
+  <span class="hljs-string">"name2"</span> : <span class="hljs-string">"git://github.com/user/project.git<span class="hljs-subst">#commit-ish</span>"</span>
+}
+</code></pre>
+<p>Either if you have to deal with bugs or you have a registry running in your organization, a staging server comes quite handy when hosting all your private modules. You might have multiple servers or Docker containers which will require all your modules to be centralized in a single spot.</p>
+<h2><a class="anchor" aria-hidden="true" name="i-need-a-light-solution"></a><a href="#i-need-a-light-solution" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>I need a Light Solution</h2>
+<p><img src="/img/blog/wait.jpeg" alt="A developer bored to wait for an endless installation"></p>
+<p>The setup is always a critical step when a developer decides whether or not use a software. Read the a long Getting Started guide discourages any developer and most of the times it completely pisses you off when any step fails 😤.
+The verdaccio installation is quite fast and does not requires any configuration other than have node.js installed.</p>
+<pre><code class="hljs">npm <span class="hljs-keyword">install</span> -g verdaccio
+</code></pre>
+<p>You can customize later on as your wish, nevertheless the default configuration is good enough for the most of developers.</p>
+<p><img src="/img/blog/runningVerdaccio.gif" alt="A developer bored to wait for an endless installation"></p>
+<p>And that’s all. Ins’t a big deal huh? Indeed it. You can start playing around with it.</p>
+<h2><a class="anchor" aria-hidden="true" name="composite-with-docker"></a><a href="#composite-with-docker" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Composite with Docker</h2>
+<p><img src="/img/blog/compose_swarm.png" alt="http://www.commitstrip.com/en/"></p>
+<p>If you have a stack based in Docker you might want to combine your local registry in the workflow.</p>
+<p>As you might know the <a href="https://github.com/yarnpkg/yarn/issues/579#issuecomment-253115162">lock files keep references of the registry</a>, (<a href="https://github.com/yarnpkg/rfcs/pull/64">#2</a>, and <a href="https://github.com/yarnpkg/yarn/issues/3330">#3</a>) ,for each dependency, but, it’s seems npm does not do it. That will be a problem if you rely on lock files and your containers are not able to resolve the registry.</p>
+<p>Verdaccio is ready for Docker and even there is a <a href="https://github.com/verdaccio/docker-examples">example repository</a> you can use to set up your composite. The <a href="https://github.com/verdaccio/docker-examples/tree/master/nginx-verdaccio">most common configuration</a> is as a proxy through <strong>nginx</strong> would looks like as follow:</p>
+<pre><code class="hljs"><span class="hljs-attribute">version</span>: '2'
+
+<span class="less"><span class="hljs-attribute">services</span>:
+  <span class="hljs-attribute">verdaccio</span>:
+    <span class="hljs-attribute">image</span>: verdaccio/<span class="hljs-attribute">verdaccio</span>:latest
+    <span class="hljs-attribute">container_name</span>: verdaccio
+    <span class="hljs-attribute">ports</span>:
+      - <span class="hljs-string">"4873:4873"</span>
+    <span class="hljs-attribute">volumes</span>:
+      - <span class="hljs-attribute">verdaccio</span>:/verdaccio
+
+  <span class="hljs-attribute">nginx</span>:
+    <span class="hljs-attribute">restart</span>: always
+    <span class="hljs-attribute">build</span>: ./conf/nginx/
+    <span class="hljs-attribute">ports</span>:
+      - <span class="hljs-string">"80:80"</span>
+    <span class="hljs-attribute">volumes</span>:
+      - /www/public
+    <span class="hljs-attribute">volumes_from</span>:
+      - verdaccio
+    <span class="hljs-attribute">links</span>:
+      - <span class="hljs-attribute">verdaccio</span>:verdaccio
+
+<span class="hljs-attribute">volumes</span>:
+  <span class="hljs-attribute">verdaccio</span>:
+    <span class="hljs-attribute">driver</span>: local
+</span></code></pre>
+<p>and the nginx configuration</p>
+<pre><code class="hljs"><span class="hljs-section">server</span> {
+  <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span> default_server;
+    <span class="hljs-attribute">access_log</span> /var/log/nginx/verdaccio.log;
+    <span class="hljs-attribute">charset</span> utf-<span class="hljs-number">8</span>;
+  <span class="hljs-attribute">location</span> / {
+    <span class="hljs-attribute">proxy_pass</span>              http://verdaccio:4873/;
+    <span class="hljs-attribute">proxy_set_header</span>        Host <span class="hljs-variable">$host</span>;
+  }
+}
+</code></pre>
+<p>Composite your Docker containers with Verdaccio is quite easy, also the configuration is minimal. If you need a more complex solution you may extend the default configuration and set an external volume as I <a href="https://github.com/verdaccio/docker-examples/tree/master/docker-local-storage-volume">described in other examples</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="wrap"></a><a href="#wrap" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Wrap</h2>
+<p>Verdaccio is not he unique solution available, others have also some sort of OSS support. But not all is completely free. Verdaccio inherits from Sinopia <a href="https://github.com/verdaccio/verdaccio/blob/master/wiki/plugins.md#sinopia-legacy-plugins">the plugin ecosystem for authentication</a> which is completely free an compatible with LDAP, Active Directory or Atlassian Crowd.</p>
+<p><a href="https://github.com/local-npm/local-npm">local-npm</a> seems a quite good solution if you need only a offline proxy. <a href="https://github.com/craftship/codebox-npm">codebox-npm</a> if you ony rely on Github auth and AWS as a platform and <a href="https://www.sonatype.com/nexus-repository-oss">Nexus3</a> when you need to scale properly.</p>
+<p>Perhaps you have in mind more use cases, I tried to select those that are the most common based on my experience as a maintainer and what people asked. Please, feel free to share your thoughts.</p>
+<p><a href="http://www.verdaccio.org/">http://www.verdaccio.org/</a></p>
+</span></div></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/en/installation.html">Getting Started</a><a href="/docs/en/docker.html">Docker</a><a href="/docs/en/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/en/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>

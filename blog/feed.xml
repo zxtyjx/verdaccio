@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Verdaccio Blog</title>
+        <link>http://www.verdaccio.org/blog</link>
+        <description>The best place to stay up-to-date with the latest Verdaccio news and events.</description>
+        <lastBuildDate>Wed, 20 Dec 2017 06:00:00 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>Verdaccio Blog</title>
+            <url>http://www.verdaccio.orgimg/verdaccio-tiny.png</url>
+            <link>http://www.verdaccio.org/blog</link>
+        </image>
+        <copyright>Copyright © 2018 Verdaccio community</copyright>
+        <item>
+            <title><![CDATA[New Version 3.0.0]]></title>
+            <link>http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html</link>
+            <guid>http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html</guid>
+            <pubDate>Wed, 20 Dec 2017 06:00:00 GMT</pubDate>
+            <description><![CDATA[This blog post will test file name parsing issues when periods are present.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Five use cases where a npm private proxy fits in your workflow]]></title>
+            <link>http://www.verdaccio.org/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html</link>
+            <guid>http://www.verdaccio.org/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html</guid>
+            <pubDate>Tue, 24 Oct 2017 06:00:00 GMT</pubDate>
+            <description><![CDATA[
+This article is about why setting up a npm private proxy is a good idea, going through most common questions that I’ve been asked since contributing to sinopia’s fork [verdaccio](http://www.verdaccio.org/), and how a developer addresses many use cases that made me appreciate how useful it can be set up a local private proxy
+Let’s review them.
+
+## As offline installation
+
+![An image from the slides doesn’t load due lack of connection](/img/blog/offline.png)
+
+These days the solution to offline mode is called yarn and lately npm@5.x . It’s a valid argument, both clients are awesome. The offline mode works fine but does not solve all the offline issues.
+
+]]></description>
+        </item>
+    </channel>
+</rss>

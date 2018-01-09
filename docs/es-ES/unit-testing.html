@@ -1,0 +1,139 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Tests Unitario · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Tests Unitario · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/index.html"/><meta property="og:description" content="All tests are split in three folders:"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="http://www.verdaccio.org/blog/atom.xml" title="Verdaccio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="http://www.verdaccio.org/blog/feed.xml" title="Verdaccio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/verdaccio-tiny.png"/><h2 class="headerTitle">Verdaccio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/es-ES/installation.html" target="_self">Documentación</a></li><li><a href="/es-ES/help.html" target="_self">Ayuda</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Development</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introducción</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/installation.html">Instalación</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/cli.html">Herramienta de línea de comando</a></li></ul></div><div class="navGroup navGroupActive"><h3>Configuración</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/configuration.html">Archivo de Configuración</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/uplinks.html">Enlaces externos</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/packages.html">Acceso a paquetes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/authentification.html">Autentificación</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/notifications.html">Notificaciones</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/logger.html">Logger</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/webui.html">Interfaz de Usuario Web</a></li></ul></div><div class="navGroup navGroupActive"><h3>Servidor</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/server-configuration.html">Configuración del Servidor</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/reverse-proxy.html">Configuración de proxy inverso</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/ssl.html">Configurar certificados SSL</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/windows.html">Instalando como Servicio en Windows</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/iss-server.html">Instalando en un servidor IIS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extensiones</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/plugins.html">Extensiones</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/dev-plugins.html">Desarrollando Extensiones</a></li></ul></div><div class="navGroup navGroupActive"><h3>DevOps</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/kubernetes.html">Kubernetes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/ansible.html">Instalar con Ansible</a></li></ul></div><div class="navGroup navGroupActive"><h3>Desarrollo</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/build.html">Construir el código fuente</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/contributing.html">Contribuye a Verdaccio</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/source-code.html">Código fuente</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/es-ES/unit-testing.html">Tests Unitario</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guías</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/protect-your-dependencies.html">Protegiendo paquetes</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Tests Unitario</h1></header><article><div><span><p>All tests are split in three folders:</p>
+<ul>
+<li><code>test/unit</code> - Tests that cover functions that transform data in an non-trivial way. These tests simply <code>require()</code> a few files and run code in there, so they are very fast.</li>
+<li><code>test/functional</code> - Tests that launch a verdaccio instance and perform a series of requests to it over http. They are slower than unit tests.</li>
+<li><code>test/integration</code> - Tests that launch a verdaccio instance and do requests to it using npm. They are really slow and can hit a real npm registry. **This actually has not been tested or</li>
+</ul>
+<p>Unit and functional tests are executed automatically by running <code>npm test</code> from the project's root directory. Integration tests are supposed to be executed manually from time to time.</p>
+<p>We use <code>jest</code> for all test.</p>
+<h2><a class="anchor" aria-hidden="true" name="the-npm-script"></a><a href="#the-npm-script" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The npm Script</h2>
+<p>To run the test script you can use either <code>npm</code> or <code>yarn</code>.</p>
+<pre><code class="hljs">yarn run test
+</code></pre>
+<p>That will trigger only two first groups of test, unit and functional.</p>
+<h3><a class="anchor" aria-hidden="true" name="using-test-unit"></a><a href="#using-test-unit" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using test/unit</h3>
+<p>The following is just an example how a unit test should looks like. Basically follow the <code>mocha</code> standard. Try to describe what exactly does the unit test in a single sentence in the header of the <code>it</code> section.</p>
+<pre><code class="hljs css javacript"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-keyword">let</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">'assert'</span>);
+<span class="hljs-keyword">let</span> parseInterval = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../src/lib/utils'</span>).parseInterval;
+
+describe(<span class="hljs-string">'Parse interval'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+ before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    ..... some magic stuff before the show
+ });
+
+  it(<span class="hljs-string">'server should respond on /'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    ... this is an <span class="hljs-keyword">async</span> test
+  });});
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="using-test-functional"></a><a href="#using-test-functional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using test/functional</h3>
+<p>Funtional testing in verdaccio has a bit more of complextity that needs a deep explanation in order to success in your experience.</p>
+<p>All starts in the <code>index.js</code> file. Let's dive in into it.</p>
+<pre><code class="hljs css javascript"><span class="hljs-comment">// create 3 server instances</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>);
+...
+
+describe(<span class="hljs-string">'functional test verdaccio'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// recover the server instances</span>
+  <span class="hljs-keyword">const</span> server = process.server;
+  <span class="hljs-keyword">const</span> server2 = process.server2;
+  <span class="hljs-keyword">const</span> server3 = process.server3;
+
+  <span class="hljs-comment">// On start initialise 3 verdaccio servers</span>
+  before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    <span class="hljs-built_in">Promise</span>.all([
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage'</span>, <span class="hljs-string">'/store/config-1.yaml'</span>),
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage2'</span>, <span class="hljs-string">'/store/config-2.yaml'</span>),
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage3'</span>, <span class="hljs-string">'/store/config-3.yaml'</span>),
+    ]).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      done();
+    }).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"error on start servers"</span>, error);
+    });
+
+  });
+
+   before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all([server, server2, server3].map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">server</span>) </span>{
+      <span class="hljs-comment">// save a lsof -p output in order to compare on finish on finish all test</span>
+    }));
+  });
+
+  ..........
+  <span class="hljs-comment">// here is the unique line you should add, the new functional test.</span>
+  <span class="hljs-built_in">require</span>(<span class="hljs-string">'./my-functional-test.js'</span>)();
+
+  <span class="hljs-comment">// On finish kill all server</span>
+  after(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    <span class="hljs-built_in">Promise</span>.all([check(server), check(server2), check(server3)]).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      done();
+    }, (reason) =&gt; {
+      assert.equal(reason, <span class="hljs-literal">null</span>);
+      done();
+    });
+
+  });
+});
+</code></pre>
+<p>Perhaps this is not he best approach, but, it's how works right now. So, you just learnt how the bootstrap works and how to add a new group of functional tests.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-serverjs"></a><a href="#the-lib-serverjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/server.js</h4>
+<p>The server class is just a wrapper that simulates a <code>npm</code> client and provides a simple API for the funtional test.</p>
+<p>As we mention in the previous section, we are creating 3 process servers that are accessible in each process as <code>process.server;</code>, <code>process.server2;</code> and ``process.server3;`.</p>
+<p>Using such reference you will be able to send request to any of the 3 instance running.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-startupjs"></a><a href="#the-lib-startupjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/startup.js</h4>
+<p>The startup file is the responsable to create the 3 verdaccio instances and inject them to the <code>process.x</code> global variable.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-requestjs"></a><a href="#the-lib-requestjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/request.js</h4>
+<p>This module holds a <code>PromiseAssert</code> which extends from <code>Promise</code> adding methods to handle all request from <code>lib/server.js</code>.</p>
+<h3><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
+<p>Here we are gonna describe how it looks like an usual functional test, check inline for more detail information.</p>
+<pre><code class="hljs css javascript"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// you can access the 3 instance through process global variables</span>
+  <span class="hljs-keyword">const</span> server = process.server;
+  <span class="hljs-keyword">const</span> server2 = process.server2;
+
+  describe(<span class="hljs-string">'my-functional-group-test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-comment">// create a raw emtpy package</span>
+      <span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./fixtures/package'</span>)(<span class="hljs-string">'new-package'</span>);
+      <span class="hljs-keyword">return</span> server.putPackage(<span class="hljs-string">'new-package'</span>, pkg)
+                  <span class="hljs-comment">// check whether was uploaded correctly</span>
+               .status(<span class="hljs-number">201</span>)
+               <span class="hljs-comment">// check whether body response is ok</span>
+               .body_ok(<span class="hljs-regexp">/created new package/</span>);
+    });
+
+     <span class="hljs-comment">// since before are not registred, we use emtpy it to display before putPackage was success</span>
+    it(<span class="hljs-string">'creating new package / srv1'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{});
+
+    it(<span class="hljs-string">'should do something else here ..... '</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-comment">// this should fails since fakeVersion does not exist</span>
+      <span class="hljs-comment">// note we use server2 because is an uplink of server 1</span>
+      <span class="hljs-keyword">return</span> server2.getTarball(<span class="hljs-string">'new-package'</span>, <span class="hljs-string">'fakeVersion'</span>)
+               .status(<span class="hljs-number">404</span>)
+               .body_error(<span class="hljs-regexp">/no such file/</span>);
+    });
+  });
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="test-integration"></a><a href="#test-integration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Test/integration</h3>
+<p>These section never has been used, but we are looking for help to make it run properly. All new ideas are very welcome.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="source-code.html">← Código fuente</a><a class="docs-next button" href="protect-your-dependencies.html">Protegiendo paquetes →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/es-ES/installation.html">Getting Started</a><a href="/docs/es-ES/docker.html">Docker</a><a href="/docs/es-ES/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/es-ES/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div></body></html>
