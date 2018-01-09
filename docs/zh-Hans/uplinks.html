@@ -34,14 +34,14 @@
 <tr><th>Property</th><th>Type</th><th>Required</th><th>Example</th><th>Support</th><th>Description</th><th>Default</th></tr>
 </thead>
 <tbody>
-<tr><td>url</td><td>string</td><td>Yes</td><td><a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a></td><td>all</td><td>The registry url</td><td></td></tr>
+<tr><td>url</td><td>string</td><td>Yes</td><td><a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a></td><td>all</td><td>The registry url</td><td>npmjs</td></tr>
 <tr><td>timeout</td><td>string</td><td>No</td><td>100ms</td><td>all</td><td>set new timeout for the request</td><td>30s</td></tr>
 <tr><td>maxage</td><td>string</td><td>No</td><td>10m</td><td>all</td><td>limit maximun failure request</td><td>2m</td></tr>
 <tr><td>fail_timeout</td><td>string</td><td>No</td><td>10m</td><td>all</td><td>defines max time when a request becomes a failure</td><td>5m</td></tr>
 <tr><td>max_fails</td><td>number</td><td>No</td><td>2</td><td>all</td><td>limit maximun failure request</td><td>2</td></tr>
 <tr><td>cache</td><td>boolean</td><td>No</td><td>[true,false]</td><td>&gt;= 2.1</td><td>avoid cache tarballs</td><td>true</td></tr>
-<tr><td>auth</td><td>list</td><td>No</td><td>type: [bearer,basic], [token: &quot;token&quot;,token_env: [true,&lt;get name process.env&gt;]]</td><td>&gt;= 2.5</td><td>assigns the header 'Authorization' see: <a href="http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules">http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules</a></td><td></td></tr>
-<tr><td>headers</td><td>list</td><td>No</td><td>authorization: &quot;Basic YourBase64EncodedCredentials==&quot;</td><td>all</td><td>list of custom headers for the uplink</td><td></td></tr>
+<tr><td>auth</td><td>list</td><td>No</td><td>type: [bearer,basic], [token: &quot;token&quot;,token_env: [true,&lt;get name process.env&gt;]]</td><td>&gt;= 2.5</td><td>assigns the header 'Authorization' see: <a href="http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules">http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules</a></td><td>disabled</td></tr>
+<tr><td>headers</td><td>list</td><td>No</td><td>authorization: &quot;Basic YourBase64EncodedCredentials==&quot;</td><td>all</td><td>list of custom headers for the uplink</td><td>disabled</td></tr>
 </tbody>
 </table>
 <h3><a class="anchor" aria-hidden="true" name="you-must-know"></a><a href="#you-must-know" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>You Must know</h3>
