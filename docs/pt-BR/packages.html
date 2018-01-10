@@ -1,0 +1,110 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Package Access · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Package Access · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/verdaccio/index.html"/><meta property="og:description" content="It&#x27;s a series of contrains that allow or restrict access to the local storage based in specific criteria."/><link rel="shortcut icon" href="/verdaccio/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="http://www.verdaccio.org/blog/atom.xml" title="Verdaccio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="http://www.verdaccio.org/blog/feed.xml" title="Verdaccio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/verdaccio/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/verdaccio/"><img class="logo" src="/verdaccio/img/verdaccio-tiny.png"/><h2 class="headerTitle">Verdaccio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/verdaccio/docs/pt-BR/installation.html" target="_self">Docs</a></li><li><a href="/verdaccio/pt-BR/help.html" target="_self">Help</a></li><li><a href="/verdaccio/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/verdaccio/img/language.svg"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/verdaccio/en">English</a></li><li><a href="/verdaccio/es-ES">Español</a></li><li><a href="/verdaccio/zh-Hans">中文</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Configuration</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/installation.html">Installation</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/cli.html">Command Line Tool</a></li></ul></div><div class="navGroup navGroupActive"><h3>Configuration</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/configuration.html">Configuration File</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/uplinks.html">Uplinks</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/verdaccio/docs/pt-BR/packages.html">Package Access</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/authentification.html">Authentification</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/notifications.html">Notifications</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/logger.html">Logger</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/webui.html">Web User Interface</a></li></ul></div><div class="navGroup navGroupActive"><h3>Server</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/server-configuration.html">Server Configuration</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/reverse-proxy.html">Reverse Proxy Setup</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/ssl.html">Set up the SSL Certificates</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/windows.html">Installing As a Windows Service</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/iss-server.html">Installing on IIS server</a></li></ul></div><div class="navGroup navGroupActive"><h3>Plugins</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/plugins.html">Plugins</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/dev-plugins.html">Developing Plugins</a></li></ul></div><div class="navGroup navGroupActive"><h3>DevOps</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/docker.html">Docker</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/kubernetes.html">Kubernetes</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/ansible.html">Installing with Ansible</a></li></ul></div><div class="navGroup navGroupActive"><h3>Development</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/build.html">Build the source code</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/contributing.html">Contributing Verdaccio</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/source-code.html">Source Code</a></li><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/unit-testing.html">Unit Testing</a></li></ul></div><div class="navGroup navGroupActive"><h3>Guides</h3><ul><li class="navListItem"><a class="navItem" href="/verdaccio/docs/pt-BR/protect-your-dependencies.html">Protecting packages</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Package Access</h1></header><article><div><span><p>It's a series of contrains that allow or restrict access to the local storage based in specific criteria.</p>
+<p>The security constraints remains on shoulders of the plugin being used, by default <code>verdaccio</code> uses the <code>htpasswd</code> plugin. If you use a different plugin the behaviour might be different. The default plugin <code>htpasswd</code> does not handles by itself <code>allow_access</code> and <code>allow_publish</code>, it's use an internal fallback in case the plugin is not ready for it. For more information about permissions visit <a href="/verdaccio/docs/pt-BR/authentification.html">the authentification section in the wiki</a>.</p>
+<h3><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
+<pre><code class="hljs css yalm">package<span class="hljs-variable">s:</span>
+  # scoped packages
+  <span class="hljs-string">'@scope/*'</span>:
+    allow_acces<span class="hljs-variable">s:</span> <span class="hljs-keyword">all</span>
+    allow_publish: <span class="hljs-keyword">all</span>
+    proxy: server2
+
+  <span class="hljs-string">'private-*'</span>:
+    acces<span class="hljs-variable">s:</span> <span class="hljs-keyword">all</span>
+    publish: <span class="hljs-keyword">all</span>
+    proxy_acces<span class="hljs-variable">s:</span> uplink1
+
+  <span class="hljs-string">'**'</span>:
+    # allow <span class="hljs-keyword">all</span> users (including non-authenticated users) <span class="hljs-keyword">to</span> <span class="hljs-keyword">read</span> <span class="hljs-built_in">and</span>
+    # publish <span class="hljs-keyword">all</span> packages
+    allow_acces<span class="hljs-variable">s:</span> <span class="hljs-keyword">all</span>
+    allow_publish: <span class="hljs-keyword">all</span>
+    proxy_acces<span class="hljs-variable">s:</span> uplink2
+</code></pre>
+<p>if none is specified, the default one remains</p>
+<pre><code class="hljs css yaml"><span class="hljs-attr">packages:</span>
+  <span class="hljs-string">'**'</span><span class="hljs-string">:</span>
+<span class="hljs-attr">     access:</span> <span class="hljs-string">all</span>
+<span class="hljs-attr">     publish:</span> <span class="hljs-string">$authenticated</span>
+</code></pre>
+<p>The list of valid groups according the default plugins are</p>
+<pre><code class="hljs css js"><span class="hljs-string">'$all'</span>, <span class="hljs-string">'$anonymous'</span>, <span class="hljs-string">'@all'</span>, <span class="hljs-string">'@anonymous'</span>, <span class="hljs-string">'all'</span>, <span class="hljs-string">'undefined'</span>, <span class="hljs-string">'anonymous'</span>
+</code></pre>
+<p>All users recieves all those set of permissions independently of is anonymous or not plus the groups provided by the plugin, in case of <code>htpasswd</code> return the username as a group. For instance, if you are logged as <code>npmUser</code> the list of groups will be.</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// groups without '$' are going to be deprecated eventually</span>
+<span class="hljs-string">'$all'</span>, <span class="hljs-string">'$anonymous'</span>, <span class="hljs-string">'@all'</span>, <span class="hljs-string">'@anonymous'</span>, <span class="hljs-string">'all'</span>, <span class="hljs-string">'undefined'</span>, <span class="hljs-string">'anonymous'</span>, <span class="hljs-string">'npmUser'</span>
+</code></pre>
+<p>If you want to protect specific set packages under your group, you need todo something like this. Let's use a <code>Regex</code> that covers all prefixed <code>npmuser-</code> packages. We recomend use a prefix for your packages, in that way it'd be easier to protect them.</p>
+<pre><code class="hljs css yaml"><span class="hljs-attr">packages:</span>
+  <span class="hljs-string">'npmuser-*'</span><span class="hljs-string">:</span>
+<span class="hljs-attr">     access:</span> <span class="hljs-string">npmuser</span>
+<span class="hljs-attr">     publish:</span> <span class="hljs-string">npmuser</span>
+</code></pre>
+<p>Restart <code>verdaccio</code> and in your console try to install <code>npmuser-core</code>.</p>
+<pre><code class="hljs css bash">$ npm install npmuser-core
+npm install npmuser-core
+npm ERR! code E403
+npm ERR! 403 Forbidden: npmuser-core@latest
+
+npm ERR! A complete <span class="hljs-built_in">log</span> of this run can be found <span class="hljs-keyword">in</span>:
+npm ERR!     /Users/user/.npm/_logs/2017-07-02T12_20_14_834Z-debug.log
+</code></pre>
+<p>You can change the existing behaviour using a different plugin authentication. <code>verdaccio</code> just check whether the user that try to access or publish specific package belongs to the right group.</p>
+<h4><a class="anchor" aria-hidden="true" name="set-multiple-groups"></a><a href="#set-multiple-groups" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Set multiple groups</h4>
+<p>Define multiple access groups is fairly easy, just define them with a white space between them.</p>
+<pre><code class="hljs css yaml">  <span class="hljs-string">'company-*'</span><span class="hljs-string">:</span>
+<span class="hljs-attr">    allow_access:</span> <span class="hljs-string">admin</span> <span class="hljs-string">internal</span>
+<span class="hljs-attr">    allow_publish:</span> <span class="hljs-string">admin</span>
+<span class="hljs-attr">    proxy_access:</span> <span class="hljs-string">server1</span>
+  <span class="hljs-string">'supersecret-*'</span><span class="hljs-string">:</span>
+<span class="hljs-attr">    allow_access:</span> <span class="hljs-string">secret</span> <span class="hljs-string">super-secret-area</span> <span class="hljs-string">ultra-secret-area</span>
+<span class="hljs-attr">    allow_publish:</span> <span class="hljs-string">secret</span> <span class="hljs-string">ultra-secret-area</span>
+<span class="hljs-attr">    proxy_access:</span> <span class="hljs-string">server1</span>
+
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" name="blocking-access-to-set-of-packages"></a><a href="#blocking-access-to-set-of-packages" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Blocking access to set of packages</h4>
+<p>If you want to block the acccess/publish to a specific group of packages. Just, do not define <code>access</code> and <code>publish</code>.</p>
+<pre><code class="hljs css yaml"><span class="hljs-attr">packages:</span>
+  <span class="hljs-string">'old-*'</span><span class="hljs-string">:</span>
+  <span class="hljs-string">'**'</span><span class="hljs-string">:</span>
+<span class="hljs-attr">     access:</span> <span class="hljs-string">all</span>
+<span class="hljs-attr">     publish:</span> <span class="hljs-string">$authenticated</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="configuration"></a><a href="#configuration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configuration</h3>
+<p>You can define mutiple <code>packages</code> and each of them must have an unique <code>Regex</code>.</p>
+<table>
+<thead>
+<tr><th>Property</th><th>Type</th><th>Required</th><th>Example</th><th>Support</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>allow_access/access</td><td>string</td><td>No</td><td>$all</td><td>all</td><td>define groups allowed to access the package</td></tr>
+<tr><td>allow_publish/publish</td><td>string</td><td>No</td><td>$authenticated</td><td>all</td><td>define groups allowed to publish</td></tr>
+<tr><td>proxy_access/proxy</td><td>string</td><td>No</td><td>npmjs</td><td>all</td><td>limit look ups for specific uplink</td></tr>
+<tr><td>storage</td><td>boolean</td><td>No</td><td>[true,false]</td><td>all</td><td>TODO</td></tr>
+</tbody>
+</table>
+<p>We higlight recommend do not use <strong>allow_access</strong>/<strong>allow_publish</strong> and <strong>proxy_access</strong> anymore, those are deprecated, please use the short version of each of those (<strong>access</strong>/<strong>publish</strong>/<strong>proxy</strong></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="uplinks.html">← Uplinks</a><a class="docs-next button" href="authentification.html">Authentification →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/verdaccio/" class="nav-home"><img src="/verdaccio/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/verdaccio/docs/pt-BR/installation.html">Getting Started</a><a href="/verdaccio/docs/pt-BR/docker.html">Docker</a><a href="/verdaccio/docs/pt-BR/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/verdaccio/pt-BR/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/verdaccio/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-2527438-21', 'auto');
+              ga('send', 'pageview');
+            </script><script>window.twttr=(function(d,s, id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src='https://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, 'script', 'twitter-wjs'));</script></body></html>
