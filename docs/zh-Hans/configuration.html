@@ -87,11 +87,11 @@
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>监听端口</h3>
 <p><code>Verdaccio</code> 默认使用 <code>4873</code> 端口. 可以通过 <a href="/verdaccio/docs/zh-Hans/cli.html">命令行传递参数</a> 或修改配置文件，以下格式是有效的</p>
 <pre><code class="hljs css yaml"><span class="hljs-attr">listen:</span>
-<span class="hljs-comment"># - localhost:4873            # 默认</span>
-<span class="hljs-comment"># - http://localhost:4873     # 同上</span>
-<span class="hljs-comment"># - 0.0.0.0:4873              # 监听所有 IP 地址 (INADDR_ANY)</span>
+<span class="hljs-comment"># - localhost:4873            # default value</span>
+<span class="hljs-comment"># - http://localhost:4873     # same thing</span>
+<span class="hljs-comment"># - 0.0.0.0:4873              # listen on all addresses (INADDR_ANY)</span>
 <span class="hljs-comment"># - https://example.org:4873  # if you want to use https</span>
-<span class="hljs-comment"># - [::1]:4873                # ipv6</span>
+<span class="hljs-comment"># - "[::1]:4873"                # ipv6</span>
 <span class="hljs-comment"># - unix:/tmp/verdaccio.sock    # unix socket</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="https"></a><a href="#https" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>HTTPS</h3>
