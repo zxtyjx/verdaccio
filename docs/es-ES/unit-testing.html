@@ -18,7 +18,7 @@
 <ul>
 <li><code>test/unit</code> - Tests that cover functions that transform data in an non-trivial way. These tests simply <code>require()</code> a few files and run code in there, so they are very fast.</li>
 <li><code>test/functional</code> - Tests that launch a verdaccio instance and perform a series of requests to it over http. They are slower than unit tests.</li>
-<li><code>test/integration</code> - Tests that launch a verdaccio instance and do requests to it using npm. They are really slow and can hit a real npm registry. <strong>unmaintained test</strong></li>
+<li><code>test/integration</code> - Tests that launch a verdaccio instance and do requests to it using npm. They are really slow and can hit a real npm registry. **This actually has not been tested or</li>
 </ul>
 <p>Unit and functional tests are executed automatically by running <code>npm test</code> from the project's root directory. Integration tests are supposed to be executed manually from time to time.</p>
 <p>We use <code>jest</code> for all test.</p>
@@ -28,98 +28,115 @@
 </code></pre>
 <p>That will trigger only two first groups of test, unit and functional.</p>
 <h3><a class="anchor" aria-hidden="true" name="using-test-unit"></a><a href="#using-test-unit" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using test/unit</h3>
-<p>The following is just an example how a unit test should looks like. Basically follow the <code>jest</code> standard.</p>
-<p>Try to describe what exactly does the unit test in a single sentence in the header of the <code>test</code> section.</p>
-<pre><code class="hljs css javacript"><span class="hljs-keyword">const</span> verdaccio = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../src/api/index'</span>);
-<span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./partials/config'</span>);
+<p>The following is just an example how a unit test should looks like. Basically follow the <code>mocha</code> standard. Try to describe what exactly does the unit test in a single sentence in the header of the <code>it</code> section.</p>
+<pre><code class="hljs css javacript"><span class="hljs-meta">'use strict'</span>;
 
-describe(<span class="hljs-string">'basic system test'</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+<span class="hljs-keyword">let</span> assert = <span class="hljs-built_in">require</span>(<span class="hljs-string">'assert'</span>);
+<span class="hljs-keyword">let</span> parseInterval = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../src/lib/utils'</span>).parseInterval;
 
-  beforeAll(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
-    <span class="hljs-comment">// something important</span>
-  });
+describe(<span class="hljs-string">'Parse interval'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+ before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    ..... some magic stuff before the show
+ });
 
-  afterAll(<span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> {
-    <span class="hljs-comment">// undo something important</span>
-  });
-
-  test(<span class="hljs-string">'server should respond on /'</span>, <span class="hljs-function"><span class="hljs-params">done</span> =&gt;</span> {
-    <span class="hljs-comment">// your test</span>
-    done();
-  });
-});
+  it(<span class="hljs-string">'server should respond on /'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    ... this is an <span class="hljs-keyword">async</span> test
+  });});
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="using-test-functional"></a><a href="#using-test-functional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using test/functional</h3>
 <p>Funtional testing in verdaccio has a bit more of complextity that needs a deep explanation in order to success in your experience.</p>
 <p>All starts in the <code>index.js</code> file. Let's dive in into it.</p>
-<pre><code class="hljs css javascript"><span class="hljs-comment">// we create 3 server instances</span>
- <span class="hljs-keyword">const</span> config1 = <span class="hljs-keyword">new</span> VerdaccioConfig(
-    <span class="hljs-string">'./store/test-storage'</span>,
-    <span class="hljs-string">'./store/config-1.yaml'</span>,
-    <span class="hljs-string">'http://localhost:55551/'</span>);
-  <span class="hljs-keyword">const</span> config2 = <span class="hljs-keyword">new</span> VerdaccioConfig(
-      <span class="hljs-string">'./store/test-storage2'</span>,
-      <span class="hljs-string">'./store/config-2.yaml'</span>,
-      <span class="hljs-string">'http://localhost:55552/'</span>);
-  <span class="hljs-keyword">const</span> config3 = <span class="hljs-keyword">new</span> VerdaccioConfig(
-        <span class="hljs-string">'./store/test-storage3'</span>,
-        <span class="hljs-string">'./store/config-3.yaml'</span>,
-        <span class="hljs-string">'http://localhost:55553/'</span>);
-  <span class="hljs-keyword">const</span> server1: IServerBridge = <span class="hljs-keyword">new</span> Server(config1.domainPath);
-  <span class="hljs-keyword">const</span> server2: IServerBridge = <span class="hljs-keyword">new</span> Server(config2.domainPath);
-  <span class="hljs-keyword">const</span> server3: IServerBridge = <span class="hljs-keyword">new</span> Server(config3.domainPath);
-  <span class="hljs-keyword">const</span> process1: IServerProcess = <span class="hljs-keyword">new</span> VerdaccioProcess(config1, server1, SILENCE_LOG);
-  <span class="hljs-keyword">const</span> process2: IServerProcess = <span class="hljs-keyword">new</span> VerdaccioProcess(config2, server2, SILENCE_LOG);
-  <span class="hljs-keyword">const</span> process3: IServerProcess = <span class="hljs-keyword">new</span> VerdaccioProcess(config3, server3, SILENCE_LOG);
-  <span class="hljs-keyword">const</span> express: any = <span class="hljs-keyword">new</span> ExpressServer();
-  ...
+<pre><code class="hljs css javascript"><span class="hljs-comment">// create 3 server instances</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>);
+...
 
-    <span class="hljs-comment">// we check whether all instances has been started, since run in independent processes</span>
-    beforeAll(<span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> {
-      <span class="hljs-built_in">Promise</span>.all([
-        process1.init(),
-        process2.init(),
-        process3.init()]).then(<span class="hljs-function">(<span class="hljs-params">forks</span>) =&gt;</span> {
-          _.map(forks, (fork) =&gt; {
-            processRunning.push(fork[<span class="hljs-number">0</span>]);
-          });
-          express.start(EXPRESS_PORT).then(<span class="hljs-function">(<span class="hljs-params">app</span>) =&gt;</span>{
-            done();
-          }, (err) =&gt; {
-            done(err);
-          });
-      }).catch(<span class="hljs-function">(<span class="hljs-params">error</span>) =&gt;</span> {
-        done(error);
-      });
+describe(<span class="hljs-string">'functional test verdaccio'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// recover the server instances</span>
+  <span class="hljs-keyword">const</span> server = process.server;
+  <span class="hljs-keyword">const</span> server2 = process.server2;
+  <span class="hljs-keyword">const</span> server3 = process.server3;
+
+  <span class="hljs-comment">// On start initialise 3 verdaccio servers</span>
+  before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    <span class="hljs-built_in">Promise</span>.all([
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage'</span>, <span class="hljs-string">'/store/config-1.yaml'</span>),
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage2'</span>, <span class="hljs-string">'/store/config-2.yaml'</span>),
+      <span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/startup'</span>).start(<span class="hljs-string">'./store/test-storage3'</span>, <span class="hljs-string">'/store/config-3.yaml'</span>),
+    ]).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      done();
+    }).catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+        <span class="hljs-built_in">console</span>.error(<span class="hljs-string">"error on start servers"</span>, error);
     });
 
-    <span class="hljs-comment">// after finish all, we ensure are been stoped</span>
-    afterAll(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-      _.map(processRunning, (fork) =&gt; {
-        fork.stop();
-      });
-      express.server.close();
+  });
+
+   before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all([server, server2, server3].map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">server</span>) </span>{
+      <span class="hljs-comment">// save a lsof -p output in order to compare on finish on finish all test</span>
+    }));
+  });
+
+  ..........
+  <span class="hljs-comment">// here is the unique line you should add, the new functional test.</span>
+  <span class="hljs-built_in">require</span>(<span class="hljs-string">'./my-functional-test.js'</span>)();
+
+  <span class="hljs-comment">// On finish kill all server</span>
+  after(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    <span class="hljs-built_in">Promise</span>.all([check(server), check(server2), check(server3)]).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      done();
+    }, (reason) =&gt; {
+      assert.equal(reason, <span class="hljs-literal">null</span>);
+      done();
     });
 
-
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
-<p>Here we are gonna describe how it looks like an usual functional test, check inline for more detail information.</p>
-<h4><a class="anchor" aria-hidden="true" name="the-lib-serverjs"></a><a href="#the-lib-serverjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/server.js</h4>
-<p>The server class is just a wrapper that simulates a <code>npm</code> client and provides a simple API for the funtional test.</p>
-<p>As we mention in the previous section, we are creating 3 process servers that are accessible in each process as <code>server1</code>, <code>server2</code> and ``server3`.</p>
-<p>Using such reference you will be able to send request to any of the 3 instance running.</p>
-<pre><code class="hljs css javascript">&lt;br /&gt;<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">server</span>) </span>{
-  <span class="hljs-comment">// we recieve any server instance via arguments</span>
-  test(<span class="hljs-string">'add tag - 404'</span>, () =&gt; {
-    <span class="hljs-comment">// we interact with the server instance.</span>
-    <span class="hljs-keyword">return</span> server.addTag(<span class="hljs-string">'testpkg-tag'</span>, <span class="hljs-string">'tagtagtag'</span>, <span class="hljs-string">'0.0.1'</span>).status(<span class="hljs-number">404</span>).body_error(<span class="hljs-regexp">/no such package/</span>);
   });
 });
 </code></pre>
+<p>Perhaps this is not he best approach, but, it's how works right now. So, you just learnt how the bootstrap works and how to add a new group of functional tests.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-serverjs"></a><a href="#the-lib-serverjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/server.js</h4>
+<p>The server class is just a wrapper that simulates a <code>npm</code> client and provides a simple API for the funtional test.</p>
+<p>As we mention in the previous section, we are creating 3 process servers that are accessible in each process as <code>process.server;</code>, <code>process.server2;</code> and ``process.server3;`.</p>
+<p>Using such reference you will be able to send request to any of the 3 instance running.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-startupjs"></a><a href="#the-lib-startupjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/startup.js</h4>
+<p>The startup file is the responsable to create the 3 verdaccio instances and inject them to the <code>process.x</code> global variable.</p>
+<h4><a class="anchor" aria-hidden="true" name="the-lib-requestjs"></a><a href="#the-lib-requestjs" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The lib/request.js</h4>
+<p>This module holds a <code>PromiseAssert</code> which extends from <code>Promise</code> adding methods to handle all request from <code>lib/server.js</code>.</p>
+<h3><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h3>
+<p>Here we are gonna describe how it looks like an usual functional test, check inline for more detail information.</p>
+<pre><code class="hljs css javascript"><span class="hljs-meta">'use strict'</span>;
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// you can access the 3 instance through process global variables</span>
+  <span class="hljs-keyword">const</span> server = process.server;
+  <span class="hljs-keyword">const</span> server2 = process.server2;
+
+  describe(<span class="hljs-string">'my-functional-group-test'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    before(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-comment">// create a raw emtpy package</span>
+      <span class="hljs-keyword">const</span> pkg = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./fixtures/package'</span>)(<span class="hljs-string">'new-package'</span>);
+      <span class="hljs-keyword">return</span> server.putPackage(<span class="hljs-string">'new-package'</span>, pkg)
+                  <span class="hljs-comment">// check whether was uploaded correctly</span>
+               .status(<span class="hljs-number">201</span>)
+               <span class="hljs-comment">// check whether body response is ok</span>
+               .body_ok(<span class="hljs-regexp">/created new package/</span>);
+    });
+
+     <span class="hljs-comment">// since before are not registred, we use emtpy it to display before putPackage was success</span>
+    it(<span class="hljs-string">'creating new package / srv1'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{});
+
+    it(<span class="hljs-string">'should do something else here ..... '</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-comment">// this should fails since fakeVersion does not exist</span>
+      <span class="hljs-comment">// note we use server2 because is an uplink of server 1</span>
+      <span class="hljs-keyword">return</span> server2.getTarball(<span class="hljs-string">'new-package'</span>, <span class="hljs-string">'fakeVersion'</span>)
+               .status(<span class="hljs-number">404</span>)
+               .body_error(<span class="hljs-regexp">/no such file/</span>);
+    });
+  });
+};
+</code></pre>
 <h3><a class="anchor" aria-hidden="true" name="test-integration"></a><a href="#test-integration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Test/integration</h3>
-<p>These section never has been used, but we are looking for help to make it run properly. <strong>All new ideas are very welcome.</strong></p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="source-code.html">← Código fuente</a><a class="docs-next button" href="node-api.html">Node API →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/es-ES/installation.html">Getting Started</a><a href="/docs/es-ES/docker.html">Docker</a><a href="/docs/es-ES/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/es-ES/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script>
+<p>These section never has been used, but we are looking for help to make it run properly. All new ideas are very welcome.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="source-code.html">← Código fuente</a><a class="docs-next button" href="node-api.html">Siguiente →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/verdaccio-blackwhite.png" alt="Verdaccio" width="66" height="58"/></a><div><h5>Docs</h5><a href="/docs/es-ES/installation.html">Getting Started</a><a href="/docs/es-ES/docker.html">Docker</a><a href="/docs/es-ES/configuration.html">Configuration</a></div><div><h5>Community</h5><a href="/es-ES/users.html">User Showcase</a><a href="https://stackoverflow.com/search?q=verdaccio" target="_blank">Stack Overflow</a><a href="https://gitter.im/verdaccio">Project Chat</a><a href="https://twitter.com/verdaccio_npm" target="_blank"><img alt="Follow Verdaccio on Twitter" src="https://img.shields.io/twitter/follow/verdaccio_npm.svg?label=Follow+Verdaccio&amp;style=social"/></a></div><div><h5>More</h5><a href="/blog">Blog</a><a href="https://github.com/verdaccio">GitHub</a><a class="github-button" href="https://github.com/verdaccio/verdaccio" data-icon="octicon-star" data-count-href="/verdaccio/verdaccio/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section></footer></div><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
