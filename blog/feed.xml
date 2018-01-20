@@ -4,7 +4,7 @@
         <title>Verdaccio Blog</title>
         <link>http://www.verdaccio.org/blog</link>
         <description>The best place to stay up-to-date with the latest Verdaccio news and events.</description>
-        <lastBuildDate>Wed, 20 Dec 2017 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 24 Oct 2017 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,13 +13,6 @@
             <link>http://www.verdaccio.org/blog</link>
         </image>
         <copyright>Copyright © 2018 Verdaccio community</copyright>
-        <item>
-            <title><![CDATA[New Version 3.0.0]]></title>
-            <link>http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html</link>
-            <guid>http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html</guid>
-            <pubDate>Wed, 20 Dec 2017 06:00:00 GMT</pubDate>
-            <description><![CDATA[This blog post will test file name parsing issues when periods are present.]]></description>
-        </item>
         <item>
             <title><![CDATA[Five use cases where a npm private proxy fits in your workflow]]></title>
             <link>http://www.verdaccio.org/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html</link>

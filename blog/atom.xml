@@ -2,24 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://www.verdaccio.org/blog</id>
     <title>Verdaccio Blog</title>
-    <updated>2017-12-20T06:00:00Z</updated>
+    <updated>2017-10-24T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="http://www.verdaccio.org/blog"/>
     <subtitle>The best place to stay up-to-date with the latest Verdaccio news and events.</subtitle>
     <logo>http://www.verdaccio.orgimg/verdaccio-tiny.png</logo>
     <rights>Copyright © 2018 Verdaccio community</rights>
-    <entry>
-        <title type="html"><![CDATA[New Version 3.0.0]]></title>
-        <id>http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html</id>
-        <link href="http://www.verdaccio.org/blog/2017/12/20/new-version-3.0.0.html">
-        </link>
-        <updated>2017-12-20T06:00:00Z</updated>
-        <summary type="html"><![CDATA[This blog post will test file name parsing issues when periods are present.]]></summary>
-        <author>
-            <name>Juan Picado</name>
-            <uri>http://twitter.com/jotadeveloper</uri>
-        </author>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Five use cases where a npm private proxy fits in your workflow]]></title>
         <id>http://www.verdaccio.org/blog/2017/10/24/five-use-cases-where-a-npm-private-proxy-fits-in-your-workflow.html</id>
