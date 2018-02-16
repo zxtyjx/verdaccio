@@ -22,20 +22,20 @@
 <p>Once you update the listen and try to run verdaccio again will ask for certificates.</p>
 <ul>
 <li><p>Generate your certificates</p>
-<p>$ openssl genrsa -out ~/.config/verdaccio/verdaccio-key.pem 2048
-$ openssl req -new -sha256 -key ~/.config/verdaccio/verdaccio-key.pem -out ~/.config/verdaccio/verdaccio-csr.pem
-$ openssl x509 -req -in ~/.config/verdaccio/verdaccio-csr.pem -signkey ~/.config/verdaccio/verdaccio-key.pem -out ~/.config/verdaccio/verdaccio-cert.pem</p>
+<p>$ openssl genrsa -out /Users/user/.config/verdaccio/verdaccio-key.pem 2048
+$ openssl req -new -sha256 -key /Users/user/.config/verdaccio/verdaccio-key.pem -out /Users/user/.config/verdaccio/verdaccio-csr.pem
+$ openssl x509 -req -in /Users/user/.config/verdaccio/verdaccio-csr.pem -signkey /Users/user/.config/verdaccio/verdaccio-key.pem -out /Users/user/.config/verdaccio/verdaccio-cert.pem</p>
 <pre><code class="hljs">
-* <span class="hljs-builtin-name">Edit</span> your<span class="hljs-built_in"> config </span>file `~/.config/verdaccio/config.yaml` <span class="hljs-keyword">and</span> <span class="hljs-builtin-name">add</span> the following section
+* <span class="hljs-builtin-name">Edit</span> your<span class="hljs-built_in"> config </span>file `/Users/user/.config/verdaccio/config.yaml` <span class="hljs-keyword">and</span> <span class="hljs-builtin-name">add</span> the following section
 
 
 
 </code></pre></li>
 </ul>
-<p>https: key: ~/.config/verdaccio/server.key cert: ~/.config/verdaccio/server.crt ca: ~/.config/verdaccio/server.ca</p>
+<p>https: key: /Users/user/.config/verdaccio/verdaccio-key.pem cert: /Users/user/.config/verdaccio/verdaccio-cert.pem ca: /Users/user/.config/verdaccio/verdaccio-csr.pem</p>
 <pre><code class="hljs">&lt;br /&gt;Alternatively, if you have a certificate as `server.pfx` format, you can add the following configuration section. The passphrase is optional and only needed, if your certificate is encrypted.
 </code></pre>
-<p>https: pfx: ~/.config/verdaccio/server.pfx passphrase: 'secret' ````</p>
+<p>https: pfx: /Users/user/.config/verdaccio/server.pfx passphrase: 'secret' ````</p>
 <p>More info on the <code>key</code>, <code>cert</code>, <code>ca</code>, <code>pfx</code> and <code>passphrase</code> arguments on the <a href="https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options">Node documentation</a></p>
 <ul>
 <li><p>Run <code>verdaccio</code> in your command line.</p></li>
