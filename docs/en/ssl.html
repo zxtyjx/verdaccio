@@ -24,22 +24,22 @@
 <ul>
 <li>Generate your certificates</li>
 </ul>
-<pre><code class="hljs"> $ openssl genrsa -out ~/.config/verdaccio/verdaccio-key<span class="hljs-selector-class">.pem</span> <span class="hljs-number">2048</span>
- $ openssl req -new -sha256 -key ~/.config/verdaccio/verdaccio-key<span class="hljs-selector-class">.pem</span> -out ~/.config/verdaccio/verdaccio-csr<span class="hljs-selector-class">.pem</span>
- $ openssl x509 -req -<span class="hljs-keyword">in</span> ~/.config/verdaccio/verdaccio-csr<span class="hljs-selector-class">.pem</span> -signkey ~/.config/verdaccio/verdaccio-key<span class="hljs-selector-class">.pem</span> -out ~/.config/verdaccio/verdaccio-cert<span class="hljs-selector-class">.pem</span>
+<pre><code class="hljs"> $ openssl genrsa -out <span class="hljs-regexp">/Users/</span>user<span class="hljs-regexp">/.config/</span>verdaccio/verdaccio-key.pem <span class="hljs-number">2048</span>
+ $ openssl req -<span class="hljs-keyword">new</span> -sha256 -key <span class="hljs-regexp">/Users/</span>user<span class="hljs-regexp">/.config/</span>verdaccio<span class="hljs-regexp">/verdaccio-key.pem -out /</span>Users<span class="hljs-regexp">/user/</span>.config<span class="hljs-regexp">/verdaccio/</span>verdaccio-csr.pem
+ $ openssl x509 -req -<span class="hljs-keyword">in</span> <span class="hljs-regexp">/Users/</span>user<span class="hljs-regexp">/.config/</span>verdaccio<span class="hljs-regexp">/verdaccio-csr.pem -signkey /</span>Users<span class="hljs-regexp">/user/</span>.config<span class="hljs-regexp">/verdaccio/</span>verdaccio-key.pem -out <span class="hljs-regexp">/Users/</span>user<span class="hljs-regexp">/.config/</span>verdaccio/verdaccio-cert.pem
 </code></pre>
 <ul>
-<li>Edit your config file <code>~/.config/verdaccio/config.yaml</code> and add the following section</li>
+<li>Edit your config file <code>/Users/user/.config/verdaccio/config.yaml</code> and add the following section</li>
 </ul>
 <pre><code class="hljs"><span class="hljs-symbol">https:</span>
-<span class="hljs-symbol">  key:</span> ~/.config<span class="hljs-meta-keyword">/verdaccio/</span>server.key
-<span class="hljs-symbol">  cert:</span> ~/.config<span class="hljs-meta-keyword">/verdaccio/</span>server.crt
-<span class="hljs-symbol">  ca:</span> ~/.config<span class="hljs-meta-keyword">/verdaccio/</span>server.ca
+<span class="hljs-symbol">    key:</span> /Users<span class="hljs-meta-keyword">/user/</span>.config<span class="hljs-meta-keyword">/verdaccio/</span>verdaccio-key.pem
+<span class="hljs-symbol">    cert:</span> /Users<span class="hljs-meta-keyword">/user/</span>.config<span class="hljs-meta-keyword">/verdaccio/</span>verdaccio-cert.pem
+<span class="hljs-symbol">    ca:</span> /Users<span class="hljs-meta-keyword">/user/</span>.config<span class="hljs-meta-keyword">/verdaccio/</span>verdaccio-csr.pem
 </code></pre>
 <p>Alternatively, if you have a certificate as <code>server.pfx</code> format, you can add the following configuration section. The passphrase is optional and only needed, if your certificate is encrypted.</p>
-<pre><code class="hljs"><span class="hljs-attribute">https</span>:
-  <span class="hljs-attribute">pfx</span>: ~/.config/verdaccio/server.pfx
-  <span class="hljs-attribute">passphrase</span>: <span class="hljs-string">'secret'</span>
+<pre><code class="hljs"><span class="hljs-string">https:</span>
+<span class="hljs-symbol">  pfx:</span> <span class="hljs-regexp">/Users/</span>user<span class="hljs-regexp">/.config/</span>verdaccio/server.pfx
+<span class="hljs-symbol">  passphrase:</span> <span class="hljs-string">'secret'</span>
 </code></pre>
 <p>More info on the <code>key</code>, <code>cert</code>, <code>ca</code>, <code>pfx</code> and <code>passphrase</code> arguments on the <a href="https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options">Node documentation</a></p>
 <ul>
