@@ -20,9 +20,9 @@
 Make sure you install prerequisites (Url Rewrite Module &amp; node) as explained in the instructions for iisnode.</li>
 <li>Create a new folder in Explorer where you want to host verdaccio.
 For example <code>C:\verdaccio</code>.
-Save <a href="https://github.com/verdaccio/verdaccio/wiki/Installing-on-IIS-server#packagejson">package.json</a>,
-<a href="https://github.com/verdaccio/verdaccio/wiki/Installing-on-IIS-server#startjs">start.js</a>
-and <a href="https://github.com/verdaccio/verdaccio/wiki/Installing-on-IIS-server#webconfig">web.config</a> in this folder.</li>
+Save <a href="#packagejson">package.json</a>,
+<a href="#startjs">start.js</a>
+and <a href="#webconfig">web.config</a> in this folder.</li>
 <li>Create a new site in Internet Information Services Manager. You can name it whatever you want.
 I'll call it verdaccio in these <a href="http://www.iis.net/learn/manage/configuring-security/application-pool-identities">instructions</a>. Specify the path to where you saved all files and a port number.</li>
 <li>Go back to Explorer and give the user that runs the application pool modify rights to the folder you just created. If you've named the new site verdaccio and did not change the app pool, it's running under an ApplicationPoolIdentity and you should give the user IIS AppPool\verdaccio modify rights see instructions if you need help. (You can restrict access later if you want so that it only has modify rights on the iisnode and verdaccio\storage)</li>
