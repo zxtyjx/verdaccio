@@ -42,7 +42,7 @@
 <tr><td>fail_timeout</td><td>string</td><td>No</td><td>10m</td><td>all</td><td>defines max time when a request becomes a failure</td><td>5m</td></tr>
 <tr><td>max_fails</td><td>number</td><td>No</td><td>2</td><td>all</td><td>limit maximun failure request</td><td>2</td></tr>
 <tr><td>cache</td><td>boolean</td><td>No</td><td>[true,false]</td><td>&gt;= 2.1</td><td>cache all remote tarballs in storage</td><td>true</td></tr>
-<tr><td>auth</td><td>list</td><td>No</td><td><a href="https://github.com/verdaccio/verdaccio/blob/master/docs/uplinks.md#auth-property">see below</a></td><td>&gt;= 2.5</td><td>assigns the header 'Authorization' see: <a href="http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules">http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules</a></td><td>disabled</td></tr>
+<tr><td>auth</td><td>list</td><td>No</td><td><a href="/docs/en/uplinks.html#auth-property">see below</a></td><td>&gt;= 2.5</td><td>assigns the header 'Authorization' see: <a href="http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules">http://blog.npmjs.org/post/118393368555/deploying-with-npm-private-modules</a></td><td>disabled</td></tr>
 <tr><td>headers</td><td>list</td><td>No</td><td>authorization: &quot;Bearer SecretJWToken==&quot;</td><td>all</td><td>list of custom headers for the uplink</td><td>disabled</td></tr>
 <tr><td>strict_ssl</td><td>boolean</td><td>No</td><td>[true,false]</td><td>&gt;= 3.0</td><td>If true, requires SSL certificates be valid.</td><td>true</td></tr>
 </tbody>
