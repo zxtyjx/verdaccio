@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Use Cases · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Using private packages"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Use Cases · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/index.html"/><meta property="og:description" content="## Using private packages"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Use Cases · Verdaccio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Using private packages"/><meta name="docsearch:version" content="3.3.0"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Use Cases · Verdaccio"/><meta property="og:type" content="website"/><meta property="og:url" content="http://www.verdaccio.org/index.html"/><meta property="og:description" content="## Using private packages"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"/><script>
               (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
               (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -12,11 +12,13 @@
             {"zIndex":100}
           )
         });
-        </script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/verdaccio-tiny.png" alt="Verdaccio"/><h2 class="headerTitleWithLogo">Verdaccio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/en/help" target="_self">Help</a></li><li class=""><a href="https://medium.com/verdaccio" target="_self">Blog</a></li><li class=""><a href="https://github.com/verdaccio" target="_self">GitHub</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/es-ES/use-cases">Español</a></li><li><a href="https://crowdin.com/project/verdaccio" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        </script><link rel="stylesheet" href="/css/prism.css"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/verdaccio-tiny.png" alt="Verdaccio"/><h2 class="headerTitleWithLogo">Verdaccio</h2></a><a href="/en/versions"><h3>3.3.0</h3></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/installation" target="_self">Docs</a></li><li class=""><a href="/en/help" target="_self">Help</a></li><li class=""><a href="https://medium.com/verdaccio" target="_self">Blog</a></li><li class=""><a href="https://github.com/verdaccio" target="_self">GitHub</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/es-ES/use-cases">Español</a></li><li><a href="https://crowdin.com/project/verdaccio" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
-        languagesMenuItem.addEventListener("click", function(){
-          if(languagesDropDown.className == "hide") {
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
             languagesDropDown.className = "visible";
           } else {
             languagesDropDown.className = "hide";
@@ -43,6 +45,7 @@
                 
                 apiKey: 'a8b4d117e513cd8d71d6a95e3d9d4a91',
                 indexName: 'verdaccio',
-                inputSelector: '#search_input_react'
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["language:en","version:3.3.0"]}
               });
             </script></body></html>
